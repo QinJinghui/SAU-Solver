@@ -9,7 +9,7 @@ from expression_tree import *
 from log_utils import *
 
 
-batch_size = 8
+batch_size = 32
 embedding_size = 128
 hidden_size = 512
 n_epochs = 80
@@ -22,7 +22,7 @@ fold_num = 5
 random_seed = 1
 # var_nums = ['x','y']
 var_nums = []
-dataset_name = "hmwp"
+dataset_name = "ALG514"
 ckpt_dir = "Math23K"
 data_path = "../dataset/math23k/Math_23K.json"
 
@@ -36,9 +36,15 @@ if dataset_name == "Math23K":
     data_path = "../dataset/math23k/Math_23K.json"
 elif dataset_name == "hmwp":
     hidden_size = 384
+    batch_size = 8
     ckpt_dir = "hmwp_Subtree_SA"
     var_nums = ['x','y']
     data_path = "../dataset/hmwp/questions.json"
+elif dataset_name == "ALG514":
+    batch_size = 32
+    ckpt_dir = "ALG514_Subtree_SA"
+    var_nums = ['x','y']
+    data_path = "../dataset/alg514/questions.json"
 
 save_dir = os.path.join("../models", ckpt_dir)
 if not os.path.exists(save_dir):
@@ -63,6 +69,9 @@ if dataset_name == "Math23K":
 elif dataset_name == "hmwp":
     data = load_hmwp_data(data_path)
     pairs, generate_nums, copy_nums = transfer_hmwp_num(data)
+elif dataset_name == "ALG514":
+    data = load_alg514_data(data_path)
+    pairs, generate_nums, copy_nums = transfer_alg514_num(data)
 
 temp_pairs = []
 for p in pairs:
