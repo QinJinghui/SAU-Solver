@@ -269,7 +269,7 @@ def load_numberword_data(filename): # load the json data to list(dict()) for Dol
     return out_data
 
 
-def load_dmai_data(filename): # load the json data to list(dict()) for DMAI data
+def load_hmwp_data(filename): # load the json data to list(dict()) for hmwp data
     print("Reading lines...")
     f = open(filename, encoding="utf-8")
     data = json.load(f)

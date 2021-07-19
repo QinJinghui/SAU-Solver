@@ -99,7 +99,8 @@ def transfer_math23k_num(data_list):  # transfer num into "NUM"
             ans = [float(eval(d['ans']))]
         if len(input_seq) > 256:
             input_seq = input_seq[:256]
-        pairs.append((input_seq, out_seq, nums, num_pos, ans))
+        d_id = d['id']
+        pairs.append((input_seq, out_seq, nums, num_pos, ans, d_id))
 
     temp_g = []
     for g in generate_nums:
@@ -110,7 +111,7 @@ def transfer_math23k_num(data_list):  # transfer num into "NUM"
     return pairs, temp_g, max_num_list_len
 
 
-def transfer_dmai_num(data_list):  # transfer num into "NUM"
+def transfer_hmwp_num(data_list):  # transfer num into "NUM"
     print("Transfer numbers...")
     pattern = re.compile("\d*\(\d+/\d+\)\d*|\d+\.\d+%?|\d+%?")
     pairs = []
@@ -244,10 +245,8 @@ def transfer_dmai_num(data_list):  # transfer num into "NUM"
 
     temp_g = []
     for g in generate_nums:
-        if generate_nums_dict[g] >= 1:
+        if generate_nums_dict[g] >= 5:
             temp_g.append(g)
     max_num_list_len = copy_nums
-    print(temp_g)
-    print(len(temp_g))
 
     return pairs, temp_g, max_num_list_len

@@ -24,7 +24,7 @@ def prepare_data(pairs_trained, pairs_tested, trim_min_count, generate_nums, cop
         elif len(pair) == 4 and pair[-1]:  # num_pos 题目与方程存在对应的数字
             input_lang.add_sen_to_vocab(pair[0])
             output_lang.add_sen_to_vocab(pair[1])
-        elif len(pair) == 6 and pair[-2]: # num_pos 题目与方程存在对应的数字
+        elif len(pair) == 5 and pair[-2]:  # num_pos 题目与方程存在对应的数字
             input_lang.add_sen_to_vocab(pair[0])
             output_lang.add_sen_to_vocab(pair[1])
     input_lang.build_input_lang(trim_min_count)
@@ -61,7 +61,7 @@ def prepare_data(pairs_trained, pairs_tested, trim_min_count, generate_nums, cop
         else:
             # pairs: (input_seq, input_len, eq_segs, eq_len, nums, num_pos, ans, num_stack)
             train_pairs.append((input_cell, len(input_cell), output_cell, len(output_cell),
-                                pair[2], pair[3], pair[4], num_stack, pair[5]))
+                                pair[2], pair[3], pair[4], num_stack)) #, pair[5]
 
     print('Indexed %d words in input language, %d words in output' % (input_lang.n_words, output_lang.n_words))
     print('Number of training data %d' % (len(train_pairs)))
@@ -94,7 +94,7 @@ def prepare_data(pairs_trained, pairs_tested, trim_min_count, generate_nums, cop
         else:
             # pairs: (input_seq, input_len, eq_segs, eq_len, nums, num_pos, ans, num_stack)
             test_pairs.append((input_cell, len(input_cell), output_cell, len(output_cell),
-                                pair[2], pair[3], pair[4], num_stack,pair[5]))
+                                pair[2], pair[3], pair[4], num_stack))
 
     print('Number of testind data %d' % (len(test_pairs)))
     return input_lang, output_lang, train_pairs, test_pairs
